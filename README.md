@@ -18,9 +18,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to install the software and how to install them.
 
-```
-Examples
-```
+Common
+node.js
+
+Mac OS
+xCode
 
 ## Deployment
 
@@ -29,3 +31,19 @@ Add additional notes about how to deploy this on a production system.
 ## Resources
 
 Add links to external resources for this project, such as CI server, bug tracker, etc.
+
+
+## Installation
+
+```
+npm install
+```
+
+## run
+```
+#(Mac OS)
+npm run ios 
+
+
+#(window or macOS)
+```
