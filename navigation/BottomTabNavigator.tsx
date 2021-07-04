@@ -10,9 +10,20 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import HomeScreen from '../screens/HomeScreen';
+import BrowserScreen from '../screens/BrowserScreen';
+import {
+    BottomTabParamList,
+    ConfigParamList,
+    HomeParamList,
+    InterestParamList,
+    TrendParamList,
+    TrendRankParamList
+} from '../types';
+import TrendScreen from "../screens/TrendScreen";
+import InterestScreen from "../screens/IntrestScreen";
+import TrendRankScreen from "../screens/TrendRankScreen";
+import ConfigScreen from "../screens/ConfigScreen";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -21,22 +32,43 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Home"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneNavigator}
+        name="Home"
+        component={HomeNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         }}
       />
-      <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
-        }}
-      />
+        <BottomTab.Screen
+            name="Trend"
+            component={TrendNavigator}
+            options={{
+                tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
+            }}
+        />
+        <BottomTab.Screen
+            name="Interest"
+            component={InterestNavigator}
+            options={{
+                tabBarIcon: ({ color }) => <TabBarIcon name="star" color={color} />,
+            }}
+        />
+        <BottomTab.Screen
+            name="TrendRank"
+            component={TrendRankNavigator}
+            options={{
+                tabBarIcon: ({ color }) => <TabBarIcon name="trending-up" color={color} />,
+            }}
+        />
+        <BottomTab.Screen
+            name="Config"
+            component={ConfigNavigator}
+            options={{
+                tabBarIcon: ({ color }) => <TabBarIcon name="settings" color={color} />,
+            }}
+        />
     </BottomTab.Navigator>
   );
 }
@@ -49,30 +81,82 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>();
+const HomeStack = createStackNavigator<HomeParamList>();
 
-function TabOneNavigator() {
+function HomeNavigator() {
   return (
-    <TabOneStack.Navigator>
-      <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
-        options={{ headerTitle: 'Tab One Title' }}
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{ headerTitle: 'HomeScreen' }}
       />
-    </TabOneStack.Navigator>
+      <HomeStack.Screen
+        name="BrowserScreen"
+        component={BrowserScreen}
+        options={{ headerTitle: 'BrowserScreen' }}
+      />
+    </HomeStack.Navigator>
   );
 }
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
+const TrendStack = createStackNavigator<TrendParamList>();
 
-function TabTwoNavigator() {
-  return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
-      />
-    </TabTwoStack.Navigator>
-  );
+function TrendNavigator() {
+    return (
+        <TrendStack.Navigator>
+            <TrendStack.Screen
+                name="TrendScreen"
+                component={TrendScreen}
+                options={{ headerTitle: 'TrendScreen' }}
+            />
+            <TrendStack.Screen
+                name="BrowserScreen"
+                component={BrowserScreen}
+                options={{ headerTitle: 'BrowserScreen' }}
+            />
+        </TrendStack.Navigator>
+    );
+}
+
+const InterestStack = createStackNavigator<InterestParamList>();
+
+function InterestNavigator() {
+    return (
+        <InterestStack.Navigator>
+            <InterestStack.Screen
+                name="InterestScreen"
+                component={InterestScreen}
+                options={{ headerTitle: 'InterestScreen' }}
+            />
+        </InterestStack.Navigator>
+    );
+}
+
+const TrendRankStack = createStackNavigator<TrendRankParamList>();
+
+function TrendRankNavigator() {
+    return (
+        <TrendRankStack.Navigator>
+            <TrendRankStack.Screen
+                name="TrendRankScreen"
+                component={TrendRankScreen}
+                options={{ headerTitle: 'TrendRankScreen' }}
+            />
+        </TrendRankStack.Navigator>
+    );
+}
+
+const ConfigStack = createStackNavigator<ConfigParamList>();
+
+function ConfigNavigator() {
+    return (
+        <ConfigStack.Navigator>
+            <ConfigStack.Screen
+                name="ConfigScreen"
+                component={ConfigScreen}
+                options={{ headerTitle: 'ConfigScreen' }}
+            />
+        </ConfigStack.Navigator>
+    );
 }

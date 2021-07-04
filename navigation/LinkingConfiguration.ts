@@ -12,14 +12,31 @@ export default {
     screens: {
       Root: {
         screens: {
-          TabOne: {
+          Home: {
             screens: {
-              TabOneScreen: 'one',
+              HomeScreen: 'home',
+              BrowserScreen: 'home-browser',
             },
           },
-          TabTwo: {
+          TrendList: {
             screens: {
-              TabTwoScreen: 'two',
+              TrendScreen: 'trend',
+              BrowserScreen: 'trend-browser',
+            },
+          },
+          Interest: {
+            screens: {
+              InterestScreen: 'interest',
+            },
+          },
+          TrendRank: {
+            screens: {
+              TrendRankScreen: 'trendRank',
+            },
+          },
+          Config: {
+            screens: {
+              ConfigScreen: 'config',
             },
           },
         },
