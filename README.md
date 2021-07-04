@@ -1,36 +1,19 @@
-# tma/TMA-App
-
-
-
-## Getting Started
-
-Download links:
-
-SSH clone URL: ssh://git@git.jetbrains.space/beyond-imagination/tma/TMA-App.git
-
-HTTPS clone URL: https://git.jetbrains.space/beyond-imagination/tma/TMA-App.git
-
-
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+# TMA-Frontend
+본 프로젝트는 무엇이든 말해보설의 FE 입니다.
 
 ## Prerequisites
 
-What things you need to install the software and how to install them.
+공통
 
-Common
-node.js
+- Node.js v14.15.1
 
-Mac OS
-xCode
+Android
+  
+- Android Studio
 
-## Deployment
-
-Add additional notes about how to deploy this on a production system.
-
-## Resources
-
-Add links to external resources for this project, such as CI server, bug tracker, etc.
+iOS
+- macOS 디바이스 (MacBook, iMac...)
+- xCode
 
 
 ## Installation
@@ -39,11 +22,17 @@ Add links to external resources for this project, such as CI server, bug tracker
 npm install
 ```
 
-## run
-```
-#(Mac OS)
-npm run ios 
+## Run
+```shell
+# Common
+npm start
 
+# Android
+npm run android 
 
-#(window or macOS)
+# iOS
+npm run ios
+
+# Web
+npm run web
 ```
