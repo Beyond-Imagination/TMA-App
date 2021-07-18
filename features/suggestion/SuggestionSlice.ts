@@ -1,12 +1,11 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {trendApi} from './trendApi';
+import {suggestionApi} from './suggestionApi';
 
-export const fetchTrendAll = createAsyncThunk(
-  'trend/fetchAll',
+export const fetchSuggestionAll = createAsyncThunk(
+  'suggestion/fetchAll',
   async (_, thunkAPI) => {
     try {
-      const response = await trendApi.fetchAll();
-
+      const response = await suggestionApi.fetchAll();
       return response.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data);
@@ -14,40 +13,43 @@ export const fetchTrendAll = createAsyncThunk(
   },
 );
 
-export interface Trend {
+export interface Suggestion {
+  _id: number;
   title: string;
+  contents: string;
+  topic: string[];
+  created_at: Date;
 }
-
-interface TrendState {
-  trends: Trend[];
+interface SuggestionState {
+  suggestions: Suggestion[];
   loading: 'idle' | 'loading' | 'pending';
   error: any;
 }
 
-const initialState: TrendState = {
-  trends: [],
+const initialState: SuggestionState = {
+  suggestions: [],
   loading: 'idle',
   error: null,
 };
 
-export const trendSlice = createSlice({
-  name: 'trend',
+export const suggestionSlice = createSlice({
+  name: 'suggestion',
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(fetchTrendAll.pending, (state, action) => {
+    builder.addCase(fetchSuggestionAll.pending, (state, action) => {
       if (state.loading === 'idle') {
         state.loading = 'loading';
       }
     });
-    builder.addCase(fetchTrendAll.fulfilled, (state, action) => {
+    builder.addCase(fetchSuggestionAll.fulfilled, (state, action) => {
       // Add user to the state array
       if (state.loading === 'loading') {
         state.loading = 'idle';
-        state.trends = action.payload;
+        state.suggestions = action.payload;
       }
     });
-    builder.addCase(fetchTrendAll.rejected, (state, action) => {
+    builder.addCase(fetchSuggestionAll.rejected, (state, action) => {
       // Add user to the state array
       if (state.loading === 'loading') {
         state.loading = 'pending';
@@ -57,5 +59,4 @@ export const trendSlice = createSlice({
   },
 });
 
-export const trendActions = trendSlice.actions;
-export default trendSlice.reducer;
+export default suggestionSlice.reducer;
