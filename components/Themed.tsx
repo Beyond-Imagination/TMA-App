@@ -9,6 +9,7 @@ import {
   Text as DefaultText,
   TouchableOpacity as DefaultTouchableOpacity,
   View as DefaultView,
+  ScrollView as DefaultScrollView,
 } from 'react-native';
 import {SafeAreaView as DefaultSafeAreaView} from 'react-native-safe-area-context';
 
@@ -36,6 +37,7 @@ type ThemeProps = {
 
 export type TextProps = ThemeProps & DefaultText['props'];
 export type ViewProps = ThemeProps & DefaultView['props'];
+export type ScrollViewProps = ThemeProps & DefaultScrollView['props'];
 export type TouchableOpacityProps = ThemeProps &
   DefaultTouchableOpacity['props'];
 
@@ -49,6 +51,11 @@ export function Text(props: TextProps) {
 export function H6(props: TextProps) {
   return <Text style={[fontStyle.h6]} {...props} />;
 }
+
+export function H5(props: TextProps) {
+  return <Text style={[fontStyle.h5]} {...props} />;
+}
+
 export function Subtitle01(props: TextProps) {
   return <Text style={[fontStyle.subTitle01]} {...props} />;
 }
@@ -94,6 +101,16 @@ export function SafeAreaView(props: ViewProps) {
     <DefaultSafeAreaView style={[{backgroundColor}, style]} {...otherProps} />
   );
 }
+export function ScrollView(props: ScrollViewProps) {
+  const {style, lightColor, darkColor, ...otherProps} = props;
+  const backgroundColor = useThemeColor(
+    {light: lightColor, dark: darkColor},
+    'background',
+  );
+  return (
+    <DefaultScrollView style={[{backgroundColor}, style]} {...otherProps} />
+  );
+}
 
 const fontStyle = StyleSheet.create({
   h6: {
@@ -103,6 +120,13 @@ const fontStyle = StyleSheet.create({
     fontSize: 20,
     lineHeight: 23,
     letterSpacing: 0.15,
+  },
+  h5: {
+    // fontFamily: 'Roboto',
+    fontStyle: 'normal',
+    fontWeight: '500',
+    fontSize: 24,
+    lineHeight: 28,
   },
   subTitle01: {
     // fontFamily: 'Roboto',

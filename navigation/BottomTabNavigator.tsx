@@ -113,7 +113,7 @@ function TrendNavigator() {
       <TrendStack.Screen
         name="TrendScreen"
         component={TrendScreen}
-        options={{headerTitle: 'TrendScreen'}}
+        options={{headerShown: false}}
       />
       <TrendStack.Screen
         name="BrowserScreen"
