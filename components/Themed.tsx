@@ -132,3 +132,4 @@ const fontStyle = StyleSheet.create({
     letterSpacing: 0.4,
   },
 });
+
