@@ -114,6 +114,7 @@ function TrendNavigator() {
         name="TrendScreen"
         component={TrendScreen}
         options={{headerShown: false}}
+        initialParams={{selectedTrend: '최신'}}
       />
       <TrendStack.Screen
         name="BrowserScreen"

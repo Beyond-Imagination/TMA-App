@@ -1,7 +1,8 @@
-import axios from 'axios';
+import axios from '../../utils/CommonApi';
 
 export const suggestionApi = {
-  async fetchAll() {
-    return await axios.get('http://localhost:3000/api/suggestions');
+  async fetchAll(interest: string) {
+    let url = '/api/suggestions' + (interest ? '?interest=' + interest : '');
+    return await axios.get(url);
   },
 };

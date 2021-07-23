@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from '../../utils/CommonApi';
 
 export const trendApi = {
   async fetchAll() {
-    return await axios.get('http://localhost:3000/api/trends');
+    return await axios.get('/api/trends');
   },
 };

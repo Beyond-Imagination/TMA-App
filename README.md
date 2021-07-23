@@ -36,3 +36,9 @@ npm run ios
 # Web
 npm run web
 ```
+
+
+## Json server 구동
+```shell
+npx json-server --watch db.json --routes routes.json
+```

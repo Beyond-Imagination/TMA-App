@@ -44,7 +44,7 @@ export const trendSlice = createSlice({
       // Add user to the state array
       if (state.loading === 'loading') {
         state.loading = 'idle';
-        state.trends = action.payload;
+        state.trends = [{title: '최신'}, ...action.payload];
       }
     });
     builder.addCase(fetchTrendAll.rejected, (state, action) => {

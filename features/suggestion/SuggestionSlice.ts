@@ -3,9 +3,9 @@ import {suggestionApi} from './suggestionApi';
 
 export const fetchSuggestionAll = createAsyncThunk(
   'suggestion/fetchAll',
-  async (_, thunkAPI) => {
+  async (interest: string, thunkAPI) => {
     try {
-      const response = await suggestionApi.fetchAll();
+      const response = await suggestionApi.fetchAll(interest);
       return response.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data);
@@ -16,10 +16,14 @@ export const fetchSuggestionAll = createAsyncThunk(
 export interface Suggestion {
   _id: number;
   title: string;
-  contents: string;
+  content: string;
   topic: string[];
   created_at: Date;
+  url: string;
+  sn: number;
+  hashtags: string[];
 }
+
 interface SuggestionState {
   suggestions: Suggestion[];
   loading: 'idle' | 'loading' | 'pending';

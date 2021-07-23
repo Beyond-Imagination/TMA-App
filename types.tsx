@@ -10,7 +10,7 @@ export type RootStackParamList = {
 
 export type BottomTabParamList = {
   Home: undefined;
-  Trend: undefined;
+  Trend: {selectedTrend: string};
   Interest: undefined;
   TrendRank: undefined;
   Config: undefined;
@@ -22,7 +22,7 @@ export type HomeParamList = {
 };
 
 export type TrendParamList = {
-  TrendScreen: undefined;
+  TrendScreen: {selectedTrend: string};
   BrowserScreen: undefined;
 };
 

@@ -62,6 +62,9 @@ export function Subtitle01(props: TextProps) {
 export function Body01(props: TextProps) {
   return <Text style={[fontStyle.body01]} {...props} />;
 }
+export function Body2(props: TextProps) {
+  return <Text style={[fontStyle.body02]} {...props} />;
+}
 export function Caption(props: TextProps) {
   return <Text style={[fontStyle.caption]} {...props} />;
 }
@@ -141,6 +144,15 @@ const fontStyle = StyleSheet.create({
     // fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: 'normal',
+    fontSize: 16,
+    lineHeight: 19,
+    /* identical to box height */
+    letterSpacing: 0.5,
+  },
+  body02: {
+    // fontFamily: 'Roboto',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
     fontSize: 14,
     lineHeight: 16,
     /* identical to box height */
@@ -156,4 +168,3 @@ const fontStyle = StyleSheet.create({
     letterSpacing: 0.4,
   },
 });
-
