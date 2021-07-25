@@ -133,7 +133,7 @@ function InterestNavigator() {
       <InterestStack.Screen
         name="InterestScreen"
         component={InterestScreen}
-        options={{headerTitle: 'InterestScreen'}}
+        options={{headerShown: false}}
       />
     </InterestStack.Navigator>
   );

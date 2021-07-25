@@ -1,14 +1,30 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {myTrendApi} from './myTrendApi';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const fetchMyTrendAll = createAsyncThunk('myTrend/fetchAll', async (_, thunkAPI) => {
-  try {
-    const response = await myTrendApi.fetchAll();
-    return response.data;
-  } catch (err) {
-    return thunkAPI.rejectWithValue(err.response.data);
-  }
-});
+export const fetchMyTrendAll = createAsyncThunk(
+  'myTrend/fetchAll',
+  async (_, thunkAPI) => {
+    try {
+      const value = await AsyncStorage.getItem('myTrends');
+      let parse: Trend[] = JSON.parse(value ? value : '[]');
+      return parse;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data);
+    }
+  },
+);
+
+export const addMyTrend = createAsyncThunk(
+  'myTrend/addTrend',
+  async (myTrends: Trend[], thunkAPI) => {
+    try {
+      await AsyncStorage.setItem('myTrends', JSON.stringify(myTrends));
+      return myTrends;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data);
+    }
+  },
+);
 
 export interface Trend {
   title: string;
@@ -44,6 +60,25 @@ export const trendSlice = createSlice({
       }
     });
     builder.addCase(fetchMyTrendAll.rejected, (state, action) => {
+      // Add user to the state array
+      if (state.loading === 'loading') {
+        state.loading = 'pending';
+        state.error = action.error;
+      }
+    });
+    builder.addCase(addMyTrend.pending, (state, action) => {
+      if (state.loading === 'idle') {
+        state.loading = 'loading';
+      }
+    });
+    builder.addCase(addMyTrend.fulfilled, (state, action) => {
+      // Add user to the state array
+      if (state.loading === 'loading') {
+        state.loading = 'idle';
+        state.myTrends = action.payload;
+      }
+    });
+    builder.addCase(addMyTrend.rejected, (state, action) => {
       // Add user to the state array
       if (state.loading === 'loading') {
         state.loading = 'pending';
