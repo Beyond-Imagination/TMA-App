@@ -161,7 +161,7 @@ function ConfigNavigator() {
       <ConfigStack.Screen
         name="ConfigScreen"
         component={ConfigScreen}
-        options={{headerTitle: 'ConfigScreen'}}
+        options={{headerShown: false}}
       />
     </ConfigStack.Navigator>
   );
