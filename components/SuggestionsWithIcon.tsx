@@ -7,7 +7,7 @@ import {
   primaryColor01,
   primaryColor02,
 } from '../constants/Colors';
-import Swiper from 'react-native-swiper';
+import Swiper from 'react-native-swiper/src';
 import {vhConverter, vwConverter} from '../constants/Ratio';
 import {Suggestion as SuggestionType} from '../features/suggestion/SuggestionSlice';
 import SuggestionWithIcon from './SuggestionWithIcon';
