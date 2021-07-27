@@ -147,7 +147,7 @@ function TrendRankNavigator() {
       <TrendRankStack.Screen
         name="TrendRankScreen"
         component={TrendRankScreen}
-        options={{headerTitle: 'TrendRankScreen'}}
+        options={{headerShown: false}}
       />
     </TrendRankStack.Navigator>
   );

@@ -5,11 +5,11 @@
 
 import * as React from 'react';
 import {
+  ScrollView as DefaultScrollView,
   StyleSheet,
   Text as DefaultText,
   TouchableOpacity as DefaultTouchableOpacity,
   View as DefaultView,
-  ScrollView as DefaultScrollView,
 } from 'react-native';
 import {SafeAreaView as DefaultSafeAreaView} from 'react-native-safe-area-context';
 
@@ -44,7 +44,6 @@ export type TouchableOpacityProps = ThemeProps &
 export function Text(props: TextProps) {
   const {style, lightColor, darkColor, ...otherProps} = props;
   const color = useThemeColor({light: lightColor, dark: darkColor}, 'text');
-
   return <DefaultText style={[{color}, style]} {...otherProps} />;
 }
 
@@ -59,12 +58,15 @@ export function H5(props: TextProps) {
 export function Subtitle01(props: TextProps) {
   return <Text style={[fontStyle.subTitle01]} {...props} />;
 }
+
 export function Body01(props: TextProps) {
   return <Text style={[fontStyle.body01]} {...props} />;
 }
+
 export function Body2(props: TextProps) {
   return <Text style={[fontStyle.body02]} {...props} />;
 }
+
 export function Caption(props: TextProps) {
   return <Text style={[fontStyle.caption]} {...props} />;
 }
@@ -104,6 +106,7 @@ export function SafeAreaView(props: ViewProps) {
     <DefaultSafeAreaView style={[{backgroundColor}, style]} {...otherProps} />
   );
 }
+
 export function ScrollView(props: ScrollViewProps) {
   const {style, lightColor, darkColor, ...otherProps} = props;
   const backgroundColor = useThemeColor(
