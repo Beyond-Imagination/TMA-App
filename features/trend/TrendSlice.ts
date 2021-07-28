@@ -6,26 +6,37 @@ export const fetchTrendAll = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await trendApi.fetchAll();
-
-      return response.data;
+      return response.data.trends[0];
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data);
     }
   },
 );
 
-export interface Trend {
-  title: string;
+export interface TrendDto {
+  trends: string[];
+  _id: string;
+  month: string;
+  createdAt: '';
+  updatedAt: '';
+  __v: number;
 }
 
 interface TrendState {
-  trends: Trend[];
+  trends: TrendDto;
   loading: 'idle' | 'loading' | 'pending';
   error: any;
 }
 
 const initialState: TrendState = {
-  trends: [],
+  trends: {
+    trends: [],
+    _id: '',
+    month: '',
+    __v: 0,
+    updatedAt: '',
+    createdAt: '',
+  },
   loading: 'idle',
   error: null,
 };
@@ -44,7 +55,7 @@ export const trendSlice = createSlice({
       // Add user to the state array
       if (state.loading === 'loading') {
         state.loading = 'idle';
-        state.trends = [{title: '최신'}, ...action.payload];
+        state.trends = action.payload;
       }
     });
     builder.addCase(fetchTrendAll.rejected, (state, action) => {

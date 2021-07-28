@@ -12,10 +12,19 @@ import {light01, primaryColor02} from '../constants/Colors';
 import {vhConverter, vwConverter} from '../constants/Ratio';
 import {Suggestion} from '../features/suggestion/SuggestionSlice';
 import * as WebBrowser from 'expo-web-browser';
+
 interface Props {
   suggestion: Suggestion;
 }
+
 const SuggestionWithIcon: React.FC<Props> = ({suggestion}) => {
+  if (suggestion == undefined) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
   return (
     <TouchableOpacity
       activeOpacity={0.6}
@@ -25,7 +34,11 @@ const SuggestionWithIcon: React.FC<Props> = ({suggestion}) => {
         WebBrowser.openBrowserAsync(suggestion.url);
       }}>
       <View style={[styles.icon]}>
-        <Text>{suggestion.topic[0]}</Text>
+        <Text>
+          {suggestion?.topic != null && suggestion.topic.length > 0
+            ? suggestion.topic[0]
+            : '기타'}
+        </Text>
       </View>
       <View lightColor={primaryColor02} style={[styles.suggestionContainer]}>
         <View lightColor={primaryColor02} style={[styles.header]}>
@@ -33,7 +46,9 @@ const SuggestionWithIcon: React.FC<Props> = ({suggestion}) => {
             <Subtitle01 numberOfLines={1}>{suggestion.title}</Subtitle01>
           </View>
           <View lightColor={primaryColor02} style={[styles.dateContainer]}>
-            <Caption lightColor={light01}>{suggestion.created_at}</Caption>
+            <Caption lightColor={light01}>
+              {suggestion.createdAt.toString().split('T')[0]}
+            </Caption>
           </View>
         </View>
         <View lightColor={primaryColor02} style={styles.contents}>

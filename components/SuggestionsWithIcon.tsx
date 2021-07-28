@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {StyleSheet} from 'react-native';
-import {H6, View} from './Themed';
+import {H6, Text, View} from './Themed';
 import {
   light01,
   light07,
@@ -20,16 +20,28 @@ const TOTAL_PAGE = 3;
 const PAGE_SIZE = 3;
 
 function renderSuggestion(i: number, suggestions: SuggestionType[]) {
+  if (suggestions.length == undefined) {
+    return (
+      <View lightColor={primaryColor02}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
   var suggArray = [];
-  for (let j = 0; j < PAGE_SIZE; j++) {
+  for (
+    let j = 0;
+    j < (suggestions.length > TOTAL_PAGE ? TOTAL_PAGE : suggestions.length);
+    j++
+  ) {
     suggArray.push(<SuggestionWithIcon suggestion={suggestions[i + j]} />);
   }
   return suggArray;
 }
 
-function renderSugestions(suggestions: SuggestionType[]) {
+function renderSuggestions(suggestions: SuggestionType[]) {
   var array = [];
-  for (let i = 0; i < TOTAL_PAGE; i++) {
+  let number = suggestions.length / PAGE_SIZE;
+  for (let i = 0; i < (number > TOTAL_PAGE ? TOTAL_PAGE : number); i++) {
     const suggestion = renderSuggestion(i, suggestions);
     array.push(<View lightColor={primaryColor02}>{suggestion}</View>);
   }
@@ -65,7 +77,7 @@ const SuggestionsWithIcon: React.FC<Props> = ({suggestions}) => {
             ]}
           />
         }>
-        {renderSugestions(suggestions)}
+        {renderSuggestions(suggestions)}
       </Swiper>
     </View>
   );

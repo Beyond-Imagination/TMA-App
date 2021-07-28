@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {SafeAreaView, View} from '../components/Themed';
+import {SafeAreaView, Text, View} from '../components/Themed';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../store';
 import HorizontalTab from '../components/HorizontalTab';
@@ -12,13 +12,14 @@ import Suggestions from '../components/Suggestions';
 import {StackScreenProps} from '@react-navigation/stack';
 import {TrendParamList} from '../types';
 import {fetchSuggestionAll} from '../features/suggestion/SuggestionSlice';
+import {fetchTrendAll} from '../features/trend/TrendSlice';
 
 const TrendScreen: React.FC<StackScreenProps<TrendParamList, 'TrendScreen'>> =
   ({route}) => {
     const {selectedTrend} = route.params;
 
     const [selected, select] = useState('');
-    const {trends} = useSelector((state: RootState) => state.trend);
+    const {trends, loading} = useSelector((state: RootState) => state.trend);
     const {suggestions} = useSelector((state: RootState) => state.suggestion);
     const dispatch = useDispatch();
 
@@ -31,15 +32,23 @@ const TrendScreen: React.FC<StackScreenProps<TrendParamList, 'TrendScreen'>> =
     }, [selectedTrend]);
 
     useEffect(() => {
-      dispatch(fetchSuggestionAll(selected == '최신' ? '' : selected));
+      dispatch(fetchSuggestionAll(selected === '최신' ? '' : selected));
     }, [dispatch, selected]);
+
+    if (loading == 'loading') {
+      return (
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      );
+    }
 
     return (
       <SafeAreaView>
         <View style={styles.container} lightColor={light05}>
           <StatusBar title={selected} />
           <HorizontalTab
-            items={trends.map(trend => trend.title)}
+            items={['최신', ...trends.trends.map(trend => trend)]}
             selected={selected}
             onPress={(title: string) => {
               select(title);
@@ -53,11 +62,7 @@ const TrendScreen: React.FC<StackScreenProps<TrendParamList, 'TrendScreen'>> =
               paddingBottom: vwConverter(46),
               height: '80%',
             }}>
-            <Suggestions
-              suggestions={suggestions.filter(value =>
-                value.topic.includes(selected),
-              )}
-            />
+            <Suggestions suggestions={suggestions} />
           </View>
         </View>
       </SafeAreaView>

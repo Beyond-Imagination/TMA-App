@@ -17,8 +17,9 @@ const HorizontalTab: React.FC<Prop> = ({items, selected, onPress}) => {
         horizontal={true}
         style={styles.scroll}
         contentContainerStyle={styles.scrollContainer}>
-        {items.map(item => (
+        {items.map((item, idx) => (
           <TouchableOpacity
+            key={idx}
             style={[styles.tab, selected == item ? styles.selected : null]}
             onPress={() => {
               onPress(item);

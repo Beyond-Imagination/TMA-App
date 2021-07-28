@@ -24,8 +24,8 @@ const NewSuggestions: React.FC<Props> = ({suggestions}) => {
       </TouchableOpacity>
       {suggestions.length > 0 ? (
         <View>
-          {suggestions.slice(0, 2).map(value => {
-            return <Suggestion {...value} />;
+          {suggestions.slice(0, 2).map((value, idx) => {
+            return <Suggestion key={idx} {...value} />;
           })}
         </View>
       ) : (

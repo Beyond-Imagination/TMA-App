@@ -9,10 +9,10 @@ interface Props {
   title: string;
   content: string;
   url: string;
-  created_at: Date;
+  createdAt: Date;
 }
 
-const Suggestion: React.FC<Props> = ({title, content, created_at, url}) => {
+const Suggestion: React.FC<Props> = ({title, content, createdAt, url}) => {
   return (
     <TouchableOpacity
       style={styles.container}
@@ -26,7 +26,7 @@ const Suggestion: React.FC<Props> = ({title, content, created_at, url}) => {
         <Body2 numberOfLines={1}>{content}</Body2>
       </View>
       <View>
-        <Caption>{created_at}</Caption>
+        <Caption>{createdAt.toString().split('T')[0]}</Caption>
       </View>
     </TouchableOpacity>
   );

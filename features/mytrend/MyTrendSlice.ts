@@ -6,7 +6,7 @@ export const fetchMyTrendAll = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const value = await AsyncStorage.getItem('myTrends');
-      let parse: Trend[] = JSON.parse(value ? value : '[]');
+      let parse: string[] = JSON.parse(value ? value : '[]');
       return parse;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data);
@@ -16,7 +16,7 @@ export const fetchMyTrendAll = createAsyncThunk(
 
 export const addMyTrend = createAsyncThunk(
   'myTrend/addTrend',
-  async (myTrends: Trend[], thunkAPI) => {
+  async (myTrends: string[], thunkAPI) => {
     try {
       await AsyncStorage.setItem('myTrends', JSON.stringify(myTrends));
       return myTrends;
@@ -31,7 +31,7 @@ export interface Trend {
 }
 
 interface MyTrendState {
-  myTrends: Trend[];
+  myTrends: string[];
   loading: 'idle' | 'loading' | 'pending';
   error: any;
 }

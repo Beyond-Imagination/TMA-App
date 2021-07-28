@@ -10,9 +10,7 @@ import {Input} from 'react-native-elements';
 import {Ionicons} from '@expo/vector-icons';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../store';
-import {myTrendApi} from '../features/mytrend/myTrendApi';
 import {addMyTrend, fetchMyTrendAll} from '../features/mytrend/MyTrendSlice';
-import {Trend} from '../features/trend/TrendSlice';
 
 export default function InterestScreen() {
   const {trends} = useSelector((state: RootState) => state.trend);
@@ -23,7 +21,7 @@ export default function InterestScreen() {
     dispatch(fetchMyTrendAll());
   }, [dispatch]);
 
-  const addArr = (newMyTrends: Trend[]) => {
+  const addArr = (newMyTrends: string[]) => {
     dispatch(addMyTrend(newMyTrends));
     dispatch(fetchMyTrendAll());
   };
@@ -49,10 +47,10 @@ export default function InterestScreen() {
             return (
               <TrendLabel
                 key={idx}
-                title={value.title}
+                title={value}
                 removable={true}
                 removePress={() =>
-                  addArr(myTrends.filter(value1 => value1.title != value.title))
+                  addArr(myTrends.filter(value1 => value1 != value))
                 }
               />
             );
@@ -80,13 +78,13 @@ export default function InterestScreen() {
             />
           </View>
           <View style={styles.labelContainer}>
-            {trends
-              .filter(trend => trend.title.includes(search))
+            {trends.trends
+              .filter(trend => trend.includes(search))
               .map((trend, idx) => {
                 return (
                   <TrendLabel
                     key={idx}
-                    title={trend.title}
+                    title={trend}
                     style={{borderColor: light03}}
                     onPress={() => {
                       addArr(
@@ -105,9 +103,9 @@ export default function InterestScreen() {
   );
 }
 
-function onlyUnique(value: Trend, index: number, self: Trend[]) {
-  let strings = self.map(test => test.title);
-  return strings.indexOf(value.title) === index;
+function onlyUnique(value: string, index: number, self: string[]) {
+  let strings = self.map(test => test);
+  return strings.indexOf(value) === index;
 }
 
 const styles = StyleSheet.create({

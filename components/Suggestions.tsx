@@ -1,8 +1,6 @@
 import * as React from 'react';
-import {StyleSheet} from 'react-native';
 import {Caption, ScrollView, View} from './Themed';
 import Suggestion from './Suggestion';
-import {vwConverter} from '../constants/Ratio';
 import {Suggestion as SuggestionType} from '../features/suggestion/SuggestionSlice';
 import {light07} from '../constants/Colors';
 
