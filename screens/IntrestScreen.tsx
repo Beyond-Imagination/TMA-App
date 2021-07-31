@@ -22,6 +22,9 @@ export default function InterestScreen() {
   }, [dispatch]);
 
   const addArr = (newMyTrends: string[]) => {
+    if(newMyTrends.length>10){
+      return
+    }
     dispatch(addMyTrend(newMyTrends));
     dispatch(fetchMyTrendAll());
   };
