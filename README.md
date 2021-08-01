@@ -37,6 +37,10 @@ npm run ios
 npm run web
 ```
 
+## .env 설정
+```shell
+cp .template.env .env
+```
 
 ## Json server 구동
 ```shell
